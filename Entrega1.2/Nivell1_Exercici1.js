@@ -1,0 +1,1 @@
+console.log(((number1, number2) => Number(number1) + Number(number2))(4, 1))
