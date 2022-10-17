@@ -7,26 +7,26 @@ Crea una funció que retorni una Promise que invoqui la funció resolve() o reje
 Invoca-la passant-li les dues funcions de manera que imprimeixin un missatge diferent depenent
 de si la Promise es resol o no.]*/
 
-// function checkName (name) {
-//     const promise = new Promise(function(resolve, reject) {
-//         if(name == 'Boris') {
-//             resolve('Correct name')
-//         } else {
-//             reject('Error')
-//         }
-//     })
-//     return promise.then(
-//         function(resolved) {
-//             console.log(resolved)
-//         },
-//         function(rejected) {
-//             console.log(rejected)
-//         }
-//     )
-// }
+function checkName (name) {
+    const promise = new Promise(function(resolve, reject) {
+        if(name == 'Boris') {
+            resolve('Correct name')
+        } else {
+            reject('Error')
+        }
+    })
+    return promise.then(
+        function(resolved) {
+            console.log(resolved)
+        },
+        function(rejected) {
+            console.log(rejected)
+        }
+    )
+}
 
-// checkName('Boris')
-// checkName('Sandra')
+checkName('Boris')
+checkName('Sandra')
 
 /*- Exercici 2
 Crea una arrow function que rebi un paràmetre i una funció callback i li passi a la funció un missatge
