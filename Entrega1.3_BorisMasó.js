@@ -69,11 +69,11 @@ let salaries = [{
 }, {
     id: 3,
     salary: 2000
-}];
+}];*/
 
-- EXERCICI 2: crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un objecte employee 
-i retorni el seu salari.
+/*- EXERCICI 2: crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un objecte employee 
+i retorni el seu salari.*/
 
-NIVELL 3
+/*NIVELL 3
 
 - EXERCICI 1: fixa un element catch a la invocació del nivell anterior que capturi qualsevol error i el mostri per la consola.*/
