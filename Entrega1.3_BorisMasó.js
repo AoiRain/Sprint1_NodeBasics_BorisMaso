@@ -24,7 +24,8 @@ checkName('Boris').then(
     },
     function(rejected) {
         console.log(rejected)
-    })
+    }
+)
 
 checkName('Sandra').then(
     function(resolved) {
@@ -32,7 +33,8 @@ checkName('Sandra').then(
     },
     function(rejected) {
         console.log(rejected)
-    })
+    }
+)
 
 /*- Exercici 2
 Crea una arrow function que rebi un paràmetre i una funció callback i li passi a la funció un missatge
@@ -108,7 +110,8 @@ getEmployee(1).then(function(resolved) {
         },
         function(rejected) {
             console.log(rejected)
-        })
+        }
+)
 
 /*- EXERCICI 2: crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un objecte employee 
 i retorni el seu salari.*/
@@ -122,7 +125,7 @@ let salaries = [{
 }, {
     id: 3,
     salary: 2000
-}];
+}]
 
 const getSalary = idNumber => {
     const promise = new Promise(function(resolve, reject) {
@@ -140,7 +143,8 @@ getSalary(2).then(function(resolved) {
         },
         function(rejected) {
             console.log(rejected)
-        })
+        }
+)
 
 /*NIVELL 3
 
