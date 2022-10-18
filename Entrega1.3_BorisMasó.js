@@ -15,33 +15,41 @@ function checkName (name) {
             reject('Error')
         }
     })
-    return promise.then(
-        function(resolved) {
-            console.log(resolved)
-        },
-        function(rejected) {
-            console.log(rejected)
-        }
-    )
+    return promise
 }
 
-checkName('Boris')
-checkName('Sandra')
+checkName('Boris').then(
+    function(resolved) {
+        console.log(resolved)
+    },
+    function(rejected) {
+        console.log(rejected)
+    })
+
+checkName('Sandra').then(
+    function(resolved) {
+        console.log(resolved)
+    },
+    function(rejected) {
+        console.log(rejected)
+    })
 
 /*- Exercici 2
 Crea una arrow function que rebi un paràmetre i una funció callback i li passi a la funció un missatge
 o un altre (que s'imprimirà per consola) en funció del paràmetre rebut.*/
 
 ((name, callbackFunction) => {
-    console.log(callbackFunction(name))
+    if(name == 'Boris') {
+        const checkedName = 'Correct Name'
+        return callbackFunction(checkedName)
+    } else {
+        const checkedName = 'Error'
+        return callbackFunction(checkedName)
+    }
 })('Boris', checkName)
 
 function checkName(name) {
-    if(name == 'Boris') {
-        return 'Correct Name'
-    } else {
-        return 'Error'
-    }
+    console.log(name)
 }
 
 /*NIVELL 2
