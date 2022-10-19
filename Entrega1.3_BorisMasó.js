@@ -107,11 +107,12 @@ i retorni el seu salari.*/
 
 const getSalary = searchedName => {
     const promise = new Promise(function(resolve, reject) {
-        const idNumber = employees.find(x => x.name === searchedName).id
-        if(idNumber >=1 && idNumber <=3) {
+        
+        if(searchedName === 'Linux Torvalds' || searchedName === 'Bill Gates' ||searchedName === 'Jeff Bezos') {
+            const idNumber = employees.find(x => x.name === searchedName).id
             resolve(salaries.find(x => x.id === idNumber).salary)
         } else {
-            reject('Error: non-existent name')
+            reject(new Error('non-existent name'))
         }
     })
     return promise
@@ -128,3 +129,11 @@ getSalary('Linux Torvalds').then(function(resolved) {
 /*NIVELL 3
 
 - EXERCICI 1: fixa un element catch a la invocació del nivell anterior que capturi qualsevol error i el mostri per la consola.*/
+
+getSalary('Boris Masó').then(function(resolved) {
+    console.log(resolved)
+})
+.catch(function(rejected){
+    console.log(rejected)
+}
+)
