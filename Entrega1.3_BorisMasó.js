@@ -40,7 +40,7 @@ checkName('Sandra').then(
 Crea una arrow function que rebi un paràmetre i una funció callback i li passi a la funció un missatge
 o un altre (que s'imprimirà per consola) en funció del paràmetre rebut.*/
 
-const checkName = (name, callbackFunction) => {
+const checkingName = (name, callbackFunction) => {
     if(name == 'Boris') {
         const checkedName = 'Correct Name'
         return callbackFunction(checkedName)
@@ -54,12 +54,12 @@ function showName(name) {
     console.log(name)
 }
 
-checkName('Boris', showName)
+checkingName('Boris', showName)
 
 /*NIVELL 2
 
 - EXERCICI 1: Donats els objectes employees i salaries, crea una arrow function getEmployee() que retorni una Promise 
-efectuant la cerca en l'objecte pel seu id.
+efectuant la cerca en l'objecte pel seu id.*/
 
 let employees = [{
     id: 1,
@@ -70,7 +70,7 @@ let employees = [{
 },{
     id: 3,
     name: 'Jeff Bezos'
-}];
+}]
  
 let salaries = [{
     id: 1,
@@ -81,17 +81,6 @@ let salaries = [{
 }, {
     id: 3,
     salary: 2000
-}];*/
-
-let employees = [{
-    id: 1,
-    name: 'Linux Torvalds'
-}, {
-    id: 2,
-    name: 'Bill Gates'
-},{
-    id: 3,
-    name: 'Jeff Bezos'
 }]
 
 const getEmployee = idNumber => {
@@ -116,29 +105,19 @@ getEmployee(1).then(function(resolved) {
 /*- EXERCICI 2: crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un objecte employee 
 i retorni el seu salari.*/
 
-let salaries = [{
-    id: 1,
-    salary: 4000
-}, {
-    id: 2,
-    salary: 1000
-}, {
-    id: 3,
-    salary: 2000
-}]
-
-const getSalary = idNumber => {
+const getSalary = searchedName => {
     const promise = new Promise(function(resolve, reject) {
+        const idNumber = employees.find(x => x.name === searchedName).id
         if(idNumber >=1 && idNumber <=3) {
             resolve(salaries.find(x => x.id === idNumber).salary)
         } else {
-            reject('Error: non-existent id')
+            reject('Error: non-existent name')
         }
     })
     return promise
 }
 
-getSalary(2).then(function(resolved) {
+getSalary('Linux Torvalds').then(function(resolved) {
             console.log(resolved)
         },
         function(rejected) {

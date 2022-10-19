@@ -33,7 +33,7 @@ const getEmployee = idNumber => {
         if(idNumber >=1 && idNumber <=3) {
             resolve(employees.find(x => x.id === idNumber).name)
         } else {
-            reject('Error: non-existent id')
+            reject('Error non-existent id')
         }
     })
     return promise
