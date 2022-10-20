@@ -30,10 +30,11 @@ let salaries = [{
 
 const getEmployee = idNumber => {
     const promise = new Promise(function(resolve, reject) {
-        if(idNumber >=1 && idNumber <=3) {
-            resolve(employees.find(x => x.id === idNumber).name)
+        const validId = employees.find(x => x.id === idNumber)
+        if(validId) {
+            resolve(validId.name)
         } else {
-            reject('Error: non-existent id')
+            reject(new Error('non-existent id'))
         }
     })
     return promise
@@ -41,10 +42,9 @@ const getEmployee = idNumber => {
 
 const getSalary = searchedName => {
     const promise = new Promise(function(resolve, reject) {
-        
-        if(searchedName === 'Linux Torvalds' || searchedName === 'Bill Gates' ||searchedName === 'Jeff Bezos') {
-            const idNumber = employees.find(x => x.name === searchedName).id
-            resolve(salaries.find(x => x.id === idNumber).salary)
+        const validName = employees.find(x => x.name === searchedName)
+        if(validName) {
+            resolve(salaries.find(x => x.id === validName.id).salary)
         } else {
             reject(new Error('non-existent name'))
         }
@@ -53,10 +53,14 @@ const getSalary = searchedName => {
 }
 
 async function showEmployeeNameAndSalary(idNumber) {
-    const employeeName = await getEmployee(idNumber)
-    const employeeSalary = await getSalary(employeeName)
-    const employeeNameAndSalary = `Name: ${employeeName}\nSalary: ${employeeSalary}`
-    console.log(employeeNameAndSalary)
+    try {
+        const employeeName = await getEmployee(idNumber)
+        const employeeSalary = await getSalary(employeeName)
+        const employeeNameAndSalary = `Name: ${employeeName}\nSalary: ${employeeSalary}`
+        console.log(employeeNameAndSalary)
+    } catch(error) {
+        console.log(error)
+    }
 }
 
 showEmployeeNameAndSalary(1)
@@ -65,7 +69,29 @@ showEmployeeNameAndSalary(1)
 Crea una nova funció asíncrona que cridi a una altra que retorni una Promise que efectuï 
 la seva funció resolve() després de 2 segons de la seva invocació.*/
 
+function checkName(name) {
+    const promise = new Promise(function(resolve, reject) {
+        if(name == 'Boris') {
+            setTimeout(() => {
+                resolve('Correct name')
+            }, 2000)
+        } else {
+            reject(new Error('incorrect Name'))
+        }
+    })
+    return promise
+}
 
+async function checkingName(name) {
+    try {
+        const userName = await checkName(name)
+        console.log(userName)
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+checkingName('Boris')
 
 /*NIVELL 2
 
