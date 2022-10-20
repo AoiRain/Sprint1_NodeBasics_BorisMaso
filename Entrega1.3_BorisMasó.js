@@ -12,7 +12,7 @@ function checkName(name) {
         if(name == 'Boris') {
             resolve('Correct name')
         } else {
-            reject('Error')
+            reject(new Error('incorrect Name'))
         }
     })
     return promise
@@ -85,10 +85,11 @@ let salaries = [{
 
 const getEmployee = idNumber => {
     const promise = new Promise(function(resolve, reject) {
-        if(idNumber >=1 && idNumber <=3) {
-            resolve(employees.find(x => x.id === idNumber).name)
+        const validId = employees.find(x => x.id === idNumber)
+        if(validId) {
+            resolve(validId.name)
         } else {
-            reject('Error: non-existent id')
+            reject(new Error('non-existent id'))
         }
     })
     return promise
@@ -107,10 +108,9 @@ i retorni el seu salari.*/
 
 const getSalary = searchedName => {
     const promise = new Promise(function(resolve, reject) {
-        
-        if(searchedName === 'Linux Torvalds' || searchedName === 'Bill Gates' ||searchedName === 'Jeff Bezos') {
-            const idNumber = employees.find(x => x.name === searchedName).id
-            resolve(salaries.find(x => x.id === idNumber).salary)
+        const validName = employees.find(x => x.name === searchedName)
+        if(validName) {
+            resolve(salaries.find(x => x.id === validName.id).salary)
         } else {
             reject(new Error('non-existent name'))
         }
@@ -126,14 +126,30 @@ getSalary('Linux Torvalds').then(function(resolved) {
         }
 )
 
+/*- EXERCICI 3: invoca la primera funció getEmployee() i després getSalary() niant l'execució de les
+dues promises de manera que es retorni per la consola el nom de l'empleat/da i el seu salari.*/
+
+getEmployee(1).then(function(resolved) {
+    const employee = resolved
+    getSalary(employee).then(function(resolved) {
+        console.log(`Name: ${employee}\nSalary: ${resolved}`)
+    })
+},
+function(rejected){
+    console.log(rejected)
+}
+)
+
 /*NIVELL 3
 
 - EXERCICI 1: fixa un element catch a la invocació del nivell anterior que capturi qualsevol error i el mostri per la consola.*/
 
-getSalary('Boris Masó').then(function(resolved) {
-    console.log(resolved)
+getEmployee(5398).then(function(resolved) {
+    const employee = resolved
+    getSalary(employee).then(function(resolved) {
+        console.log(`Name: ${employee}\nSalary: ${resolved}`)
+    })
 })
-.catch(function(rejected){
-    console.log(rejected)
-}
-)
+.catch(function(error) {
+    console.log(error)
+})

@@ -28,6 +28,39 @@ let salaries = [{
     salary: 2000
 }]
 
+const getEmployee = idNumber => {
+    const promise = new Promise(function(resolve, reject) {
+        if(idNumber >=1 && idNumber <=3) {
+            resolve(employees.find(x => x.id === idNumber).name)
+        } else {
+            reject('Error: non-existent id')
+        }
+    })
+    return promise
+}
+
+const getSalary = searchedName => {
+    const promise = new Promise(function(resolve, reject) {
+        
+        if(searchedName === 'Linux Torvalds' || searchedName === 'Bill Gates' ||searchedName === 'Jeff Bezos') {
+            const idNumber = employees.find(x => x.name === searchedName).id
+            resolve(salaries.find(x => x.id === idNumber).salary)
+        } else {
+            reject(new Error('non-existent name'))
+        }
+    })
+    return promise
+}
+
+async function showEmployeeNameAndSalary(idNumber) {
+    const employeeName = await getEmployee(idNumber)
+    const employeeSalary = await getSalary(employeeName)
+    const employeeNameAndSalary = `Name: ${employeeName}\nSalary: ${employeeSalary}`
+    console.log(employeeNameAndSalary)
+}
+
+showEmployeeNameAndSalary(1)
+
 /*- Exercici 2
 Crea una nova funció asíncrona que cridi a una altra que retorni una Promise que efectuï 
 la seva funció resolve() després de 2 segons de la seva invocació.*/
