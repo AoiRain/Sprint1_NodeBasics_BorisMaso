@@ -36,6 +36,7 @@ function compressFileIntoGzipFile(fileName, gzipFileName) {
 	const writable = createWriteStream(`./${gzipFileName}`);
 
 	readable.pipe(gzip).pipe(writable);
+	console.log(`${fileName} compressed correctly in ${gzipFileName}.`);
 }
 
 compressFileIntoGzipFile('textFile.txt', 'gzipFile.txt.gz');
